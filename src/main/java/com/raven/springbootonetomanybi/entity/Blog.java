@@ -20,7 +20,8 @@ public class Blog {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "owner_id")
     private Owner owner;
 

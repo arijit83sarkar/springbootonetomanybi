@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "OWNER_DETAILS")
 public class Owner {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -19,7 +19,8 @@ public class Owner {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH })
     private List<Blog> blogList;
 
     public Owner() {

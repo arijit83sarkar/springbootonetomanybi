@@ -11,4 +11,9 @@ public class SpringbootonetomanybiApplication {
 		System.out.println("Application started...");
 	}
 
+	/*
+	SET foreign_key_checks = 0
+	SET foreign_key_checks = 1
+	*/
+
 }
