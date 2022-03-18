@@ -30,16 +30,24 @@ public class OwnerController {
 	public String saveOwner(@RequestBody Owner owner) {
 		System.out.println("Owner save called...");
 
+		// a new Owner
 		Owner ownerIn = new Owner(owner.getName(), owner.getEmail());
 
+		// list of Blog
 		List<Blog> blogs = new ArrayList<>();
 		for (Blog blogIn : owner.getBlogList()) {
+			// new Blog
 			Blog blog = new Blog(blogIn.getTitle(), blogIn.getCategory(), blogIn.getContent());
-			blog.setOwner(ownerIn); // set owner to blog
+			// set owner to Blog
+			blog.setOwner(ownerIn);
+			// add blog to list
 			blogs.add(blog);
 		}
+
+		// add blog list to Owner
 		ownerIn.setBlogList(blogs);
 
+		// save Owner
 		Owner ownerOut = ownerRepository.save(ownerIn);
 		System.out.println("Owner out :: " + ownerOut);
 
@@ -51,22 +59,30 @@ public class OwnerController {
 	public String saveBlog(@RequestParam(name = "id") String id) {
 		System.out.println("Blog save called...");
 
+		// fetch Ower
 		Owner ownerTemp = ownerRepository.getById(Integer.valueOf(id));
 
+		// list of Blog
 		List<Blog> blogs = new ArrayList<>();
 
+		// new Blog
 		Blog blog = new Blog("Build application server using NodeJs", "nodeJs",
 				"We will build REStful api using nodeJs.");
-		blog.setOwner(ownerTemp); // set owner to blog
+		// set owner to blog
+		blog.setOwner(ownerTemp);
+		// add Blog to list
 		blogs.add(blog);
 
 		blog = new Blog("Single Page Application using Angular", "Angular",
 				"We can build robust application using Angular framework.");
-		blog.setOwner(ownerTemp); // set owner to blog
+		// set owner to blog
+		blog.setOwner(ownerTemp);
 		blogs.add(blog);
 
+		// add Blog list to Owner
 		ownerTemp.setBlogList(blogs);
 
+		// save Owner
 		ownerRepository.save(ownerTemp);
 
 		System.out.println("Saved!!!");
@@ -77,6 +93,7 @@ public class OwnerController {
 	public String getOwner(@PathVariable(name = "id") String id) {
 		System.out.println("Owner get called...");
 
+		// fetch Owner
 		Owner ownerOut = ownerRepository.getById(Integer.valueOf(id));
 		System.out.println("\nOwner details :: \n" + ownerOut);
 		System.out.println("\nList of Blogs :: \n" + ownerOut.getBlogList());
@@ -89,6 +106,7 @@ public class OwnerController {
 	public String getBlog(@PathVariable(name = "id") String id) {
 		System.out.println("Blog get called...");
 
+		// fetch Blog
 		Blog blogOut = blogRepository.getById(Integer.valueOf(id));
 		System.out.println("\nBlog details :: \n" + blogOut);
 		System.out.println("\nOwner details :: \n" + blogOut.getOwner());
