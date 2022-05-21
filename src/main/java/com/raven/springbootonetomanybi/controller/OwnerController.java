@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/owner")
 public class OwnerController {
-	@Autowired
+
 	private OwnerRepository ownerRepository;
+	private BlogRepository blogRepository;
 
 	@Autowired
-	private BlogRepository blogRepository;
+	public OwnerController(OwnerRepository ownerRepository, BlogRepository blogRepository) {
+		this.ownerRepository = ownerRepository;
+		this.blogRepository = blogRepository;
+	}
 
 	@PostMapping("/saveOwner")
 	public String saveOwner(@RequestBody Owner owner) {
