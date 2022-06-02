@@ -10,10 +10,11 @@ public class SpringbootonetomanybiApplication {
 		SpringApplication.run(SpringbootonetomanybiApplication.class, args);
 		System.out.println("Application started...");
 	}
+}
+
+
 
 	/*
 	SET foreign_key_checks = 0
 	SET foreign_key_checks = 1
 	*/
-
-}
